@@ -44,11 +44,11 @@ jobs:
     - name: Deploy to Azure Container Instances
       uses: azure/aci-deploy@v1
       with:
-        resource_group: <resource-group>
+        resource_group: CaluculatorAppRG
         dns_name_label: react-calculator
         image: acramdev.azurecr.io/react-calculator:$GITHUB_SHA
         registry_login_server: acramdev.azurecr.io
         registry_username: ${{ secrets.AZURE_REGISTRY_USERNAME }}
         registry_password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
         name: react-calculator
-        location: West US
+        location: japaneast
