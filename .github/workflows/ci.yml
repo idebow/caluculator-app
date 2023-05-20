@@ -28,3 +28,27 @@ jobs:
 
     - name: Build Docker image
       run: docker build -t react-calculator .
+
+    - name: Login to Azure Container Registry
+      uses: docker/login-action@v1 
+      with:
+        registry: <your-registry>.azurecr.io
+        username: ${{ secrets.AZURE_REGISTRY_USERNAME }}
+        password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
+
+    - name: Build and push Docker image
+      run: |
+        docker build -t <your-registry>.azurecr.io/react-calculator:$GITHUB_SHA .
+        docker push <your-registry>.azurecr.io/react-calculator:$GITHUB_SHA
+
+    - name: Deploy to Azure Container Instances
+      uses: azure/aci-deploy@v1
+      with:
+        resource_group: <resource-group>
+        dns_name_label: react-calculator
+        image: <your-registry>.azurecr.io/react-calculator:$GITHUB_SHA
+        registry_login_server: <your-registry>.azurecr.io
+        registry_username: ${{ secrets.AZURE_REGISTRY_USERNAME }}
+        registry_password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
+        name: react-calculator
+        location: West US
