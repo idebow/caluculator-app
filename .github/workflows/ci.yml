@@ -50,9 +50,9 @@ jobs:
       uses: azure/aci-deploy@v1
       with:
         resource-group: CaluculatorAppRG
-        dns-name-label: aci-calcapp-am-tech-lab
+        dns-name-label: react-calculator
         image: acramdev.azurecr.io/react-calculator:$GITHUB_SHA
         registry-username: ${{ secrets.REGISTRY_USERNAME }}
         registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-        name: aci-calcapp-am-tech-lab
+        name: react-calculator
         location: 'japaneast'
