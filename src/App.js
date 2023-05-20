@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="input">{input}</div>
+      <div className="input" data-testid="calc-result">{input}</div>
       <div className="buttons">
         <div className="operators">
           <button onClick={() => handleClick("+")}>+</button>
