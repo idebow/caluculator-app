@@ -38,8 +38,8 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build -t acramdev.azurecr.io/react-calculator:$GITHUB_SHA .
-        docker push acramdev.azurecr.io/react-calculator:$GITHUB_SHA
+        docker build -t acramdev.azurecr.io/react-calculator:${{ github.sha }} .
+        docker push acramdev.azurecr.io/react-calculator:${{ github.sha }}
 
   deploy:
     needs: build
@@ -60,7 +60,7 @@ jobs:
       with:
         resource-group: CaluculatorAppRG
         dns-name-label: react-calculator
-        image: acramdev.azurecr.io/react-calculator:$GITHUB_SHA
+        image: acramdev.azurecr.io/react-calculator:${{ github.sha }}
         registry-username: ${{ secrets.REGISTRY_USERNAME }}
         registry-password: ${{ secrets.REGISTRY_PASSWORD }}
         name: react-calculator
