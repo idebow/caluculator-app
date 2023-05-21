@@ -18,7 +18,8 @@
   flex-direction: column;
 }
 
-.operators, .digits {
+.operators,
+.digits {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1em;
@@ -27,4 +28,27 @@
 button {
   padding: 1em;
   font-size: 1em;
+}
+
+/* ライトテーマ */
+@media (prefers-color-scheme: light) {
+  .App {
+    background-color: #f0f0f0;
+    color: #000;
+  }
+}
+
+/* ダークテーマ */
+@media (prefers-color-scheme: dark) {
+  .App {
+    background-color: #333;
+    color: #fff;
+  }
+}
+
+/* レスポンシブデザインのスタイルを追加 */
+@media (max-width: 600px) {
+  .App {
+    width: 100%;
+  }
 }
