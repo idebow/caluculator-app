@@ -13,18 +13,56 @@
   font-size: 2em;
 }
 
-.buttons {
-  display: flex;
-  flex-direction: column;
+button {
+  padding: 1em;
+  font-size: 1em;
+  border: none;
+  transition: all 0.1s;
 }
 
-.operators, .digits {
+button:active {
+  transform: scale(0.95);
+}
+.grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1em;
+  margin-bottom: 1em;
 }
 
 button {
   padding: 1em;
   font-size: 1em;
+}
+
+.operator {
+  background-color: orange;
+  color: white;
+}
+
+.wide-button {
+  grid-column: span 3;
+  background-color: darkgray;
+  margin-bottom: 1em;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #333;
+    color: white;
+  }
+
+  .operator {
+    background-color: orange;
+  }
+
+  button {
+    background-color: #333;
+    color: white;
+    border: 1px solid #666;
+  }
+
+  .wide-button {
+    background-color: #444;
+  }
 }
