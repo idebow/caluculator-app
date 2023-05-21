@@ -7,6 +7,14 @@ import './App.css';
 function App() {
   const [input, setInput] = useState("");
 
+  const appendInput = (e) => {
+    setInput(input + e.target.innerText);
+  }
+
+  const clearInput = () => {
+    setInput("");
+  }
+
   const handleClick = (val) => {
     setInput(input + val);
   };
@@ -30,24 +38,40 @@ function App() {
 
   return (
     <div className="App">
-      <div className="input" data-testid="calc-result">{input}</div>
+      <div className="input">{input}</div>
       <div className="buttons">
-        <div className="operators">
-          <button onClick={() => handleClick("+")}>+</button>
-          <button onClick={() => handleClick("-")}>-</button>
-          <button onClick={() => handleClick("*")}>*</button>
-          <button onClick={() => handleClick("/")}>/</button>
+        <div className="row">
+          <button onClick={clearInput} className="btn btn-ac">AC</button>
         </div>
-        <div className="digits">
-          {["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."].map((num) => (
-            <button key={num} onClick={() => handleClick(num)}>
-              {num}
+          <div className="grid-container">
+            <button onClick={appendInput}>7</button>
+            <button onClick={appendInput}>8</button>
+            <button onClick={appendInput}>9</button>
+            <button className="operator" onClick={appendInput}>
+              /
             </button>
-          ))}
-          <button onClick={handleClear}>Clear</button>
-          <button onClick={calculate}>=</button>
+            <button onClick={appendInput}>4</button>
+            <button onClick={appendInput}>5</button>
+            <button onClick={appendInput}>6</button>
+            <button className="operator" onClick={appendInput}>
+              *
+            </button>
+            <button onClick={appendInput}>1</button>
+            <button onClick={appendInput}>2</button>
+            <button onClick={appendInput}>3</button>
+            <button className="operator" onClick={appendInput}>
+              -
+            </button>
+            <button onClick={appendInput}>0</button>
+            <button onClick={appendInput}>.</button>
+            <button className="operator" onClick={calculate}>
+              =
+            </button>
+            <button className="operator" onClick={appendInput}>
+              +
+            </button>
+          </div>
         </div>
-      </div>
     </div>
   );
 }
