@@ -60,7 +60,8 @@ jobs:
       with:
         resource-group: CaluculatorAppRG
         dns-name-label: react-caluculator
-        image: acramdev.azurecr.io/react-calculator:${{ github.sha }}
+        image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/react-calculator:${{ github.sha }}
+        registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
         registry-username: ${{ secrets.REGISTRY_USERNAME }}
         registry-password: ${{ secrets.REGISTRY_PASSWORD }}
         name: react-caluculator
