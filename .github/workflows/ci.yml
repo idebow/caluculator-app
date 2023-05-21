@@ -38,7 +38,7 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build -t acramdev.azurecr.io/react-calculator:${{ github.sha }} .
+        docker build . -t acramdev.azurecr.io/react-calculator:${{ github.sha }}
         docker push acramdev.azurecr.io/react-calculator:${{ github.sha }}
 
   deploy:
@@ -50,6 +50,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     
+    - name: Login to Azure Container Registry
+      uses: docker/login-action@v1 
+      with:
+        registry: acramdev.azurecr.io
+        username: ${{ secrets.AZURE_REGISTRY_USERNAME }}
+        password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
+
     - name: Login to Azure
       uses: azure/login@v1
       with:
