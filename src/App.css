@@ -1,7 +1,5 @@
 /* src/App.css */
 
-/* src/App.css */
-
 .App {
   display: flex;
   flex-direction: column;
@@ -15,12 +13,16 @@
   font-size: 2em;
 }
 
-.buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+button {
+  padding: 1em;
+  font-size: 1em;
+  border: none;
+  transition: all 0.1s;
 }
 
+button:active {
+  transform: scale(0.95);
+}
 .grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -41,6 +43,7 @@ button {
 .wide-button {
   grid-column: span 3;
   background-color: darkgray;
+  margin-bottom: 1em;
 }
 
 @media (prefers-color-scheme: dark) {

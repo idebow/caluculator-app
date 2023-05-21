@@ -40,38 +40,38 @@ function App() {
     <div className="App">
       <div className="input">{input}</div>
       <div className="buttons">
-        <div className="row">
-          <button onClick={clearInput} className="btn btn-ac">AC</button>
+        <button className="wide-button" onClick={clearInput}>
+          AC
+        </button>
+        <div className="grid-container">
+          <button onClick={appendInput}>7</button>
+          <button onClick={appendInput}>8</button>
+          <button onClick={appendInput}>9</button>
+          <button className="operator" onClick={appendInput}>
+            /
+          </button>
+          <button onClick={appendInput}>4</button>
+          <button onClick={appendInput}>5</button>
+          <button onClick={appendInput}>6</button>
+          <button className="operator" onClick={appendInput}>
+            *
+          </button>
+          <button onClick={appendInput}>1</button>
+          <button onClick={appendInput}>2</button>
+          <button onClick={appendInput}>3</button>
+          <button className="operator" onClick={appendInput}>
+            -
+          </button>
+          <button onClick={appendInput}>0</button>
+          <button onClick={appendInput}>.</button>
+          <button className="operator" onClick={calculate}>
+            =
+          </button>
+          <button className="operator" onClick={appendInput}>
+            +
+          </button>
         </div>
-          <div className="grid-container">
-            <button onClick={appendInput}>7</button>
-            <button onClick={appendInput}>8</button>
-            <button onClick={appendInput}>9</button>
-            <button className="operator" onClick={appendInput}>
-              /
-            </button>
-            <button onClick={appendInput}>4</button>
-            <button onClick={appendInput}>5</button>
-            <button onClick={appendInput}>6</button>
-            <button className="operator" onClick={appendInput}>
-              *
-            </button>
-            <button onClick={appendInput}>1</button>
-            <button onClick={appendInput}>2</button>
-            <button onClick={appendInput}>3</button>
-            <button className="operator" onClick={appendInput}>
-              -
-            </button>
-            <button onClick={appendInput}>0</button>
-            <button onClick={appendInput}>.</button>
-            <button className="operator" onClick={calculate}>
-              =
-            </button>
-            <button className="operator" onClick={appendInput}>
-              +
-            </button>
-          </div>
-        </div>
+      </div>
     </div>
   );
 }
