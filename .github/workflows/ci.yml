@@ -1,75 +1,31 @@
 # .github/workflows/ci.yml
 
-name: CI
+name: CI/CD Pipeline
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  build:
-
+  build_and_push:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 16
-      
-    - name: Install dependencies
-      run: npm ci
-      
-    - name: Run tests
-      run: npm test
 
-    - name: Build Docker image
-      run: docker build -t react-calculator .
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
 
-    - name: Login to Azure Container Registry
-      uses: docker/login-action@v1 
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
       with:
-        registry: acramdev.azurecr.io
-        username: ${{ secrets.AZURE_REGISTRY_USERNAME }}
-        password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build and push Docker image
-      run: |
-        docker build . -t acramdev.azurecr.io/react-calculator:${{ github.sha }}
-        docker push acramdev.azurecr.io/react-calculator:${{ github.sha }}
-
-  deploy:
-    needs: build
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    
-    - name: Login to Azure Container Registry
-      uses: docker/login-action@v1 
+      uses: docker/build-push-action@v2
       with:
-        registry: acramdev.azurecr.io
-        username: ${{ secrets.AZURE_REGISTRY_USERNAME }}
-        password: ${{ secrets.AZURE_REGISTRY_PASSWORD }}
-
-    - name: Login to Azure
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    # - name: Deploy to Azure Container Instances
-    #   uses: azure/aci-deploy@v1
-    #   with:
-    #     resource-group: CaluculatorAppRG
-    #     dns-name-label: react-caluculator
-    #     image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/react-calculator:${{ github.sha }}
-    #     registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-    #     registry-username: ${{ secrets.REGISTRY_USERNAME }}
-    #     registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-    #     name: react-caluculator
-    #     location: 'japaneast'
+        context: .
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/react-calculator:${{ github.sha }}
